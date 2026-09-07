@@ -1,0 +1,1028 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
+
+    <title>InterviewAI | AI Interview</title>
+
+    <link rel="stylesheet" href="style.css">
+    
+</head>
+
+
+<body>
+
+<div class="interview-page">
+
+
+    <!-- ========================================
+         TOP BAR
+    ======================================== -->
+
+    <header class="interview-header">
+
+        <div class="interview-brand">
+
+            <div class="brand-icon">
+                AI
+            </div>
+
+            <span>
+                InterviewAI
+            </span>
+
+        </div>
+
+
+        <div class="interview-status">
+
+            <span class="status-dot"></span>
+
+            AI Interview Active
+
+        </div>
+
+
+        <button
+            class="exit-interview"
+            onclick="exitInterview()"
+        >
+            Exit Interview
+        </button>
+
+    </header>
+
+
+
+    <!-- ========================================
+         MAIN INTERVIEW AREA
+    ======================================== -->
+
+    <main class="interview-main">
+
+
+        <!-- ====================================
+             LEFT: AI CHAT
+        ===================================== -->
+
+        <section class="interview-chat">
+
+
+            <div class="chat-header">
+
+                <div>
+
+                    <p class="dashboard-label">
+                        AI INTERVIEWER
+                    </p>
+
+                    <h1>
+                        Technical Interview
+                    </h1>
+
+                </div>
+
+
+                <div class="question-counter">
+
+                    Question
+                    <strong id="questionNumber">
+                        1
+                    </strong>
+                    / 5
+
+                </div>
+
+            </div>
+
+
+
+            <!-- AI MESSAGE -->
+
+            <div class="ai-message">
+
+                <div class="ai-avatar">
+                    AI
+                </div>
+
+
+                <div class="message-content">
+
+                    <span class="message-label">
+                        InterviewAI
+                    </span>
+
+                    <p id="aiQuestion">
+
+                        Hello! Welcome to your AI interview.
+
+                        Let's begin with a simple question.
+
+                        <br><br>
+
+                        <strong>
+                            Can you introduce yourself and
+                            tell me about your technical
+                            background?
+                        </strong>
+
+                    </p>
+
+                </div>
+
+            </div>
+
+
+
+            <!-- RESPONSE AREA -->
+
+            <div class="response-area">
+
+
+                <div class="response-label">
+
+                    <span>
+                        YOUR RESPONSE
+                    </span>
+
+                    <span id="recordingStatus">
+                        Ready
+                    </span>
+
+                </div>
+
+
+                <textarea
+                    id="answerInput"
+                    placeholder="Type your answer here or use the microphone..."
+                ></textarea>
+
+
+                <!-- VOICE CONTROLS -->
+
+                <div class="voice-controls">
+                    <button
+                    id="micButton"
+                    class="mic-button"
+                    onclick="toggleRecording()"
+                    >
+                    🎙
+                    <span>Start Speaking</span>
+                </button>
+                <button
+                id="recordButton"
+                class="record-button"
+                onclick="toggleInterviewRecording()"
+                >
+                🔴
+                <span>Record Interview</span>
+            </button>
+            <button
+            class="submit-answer"
+            onclick="submitAnswer()"
+            >
+            Submit Answer
+            <span>→</span>
+        </button>
+    </div>
+
+
+                <p class="voice-note">
+
+                    You can type your answer or use voice
+                    assistance to respond naturally.
+
+                </p>
+
+            </div>
+
+
+        </section>
+
+
+
+        <!-- ====================================
+             RIGHT: CAMERA + LIVE ANALYSIS
+        ===================================== -->
+
+        <aside class="analysis-panel">
+
+
+            <!-- CAMERA -->
+
+            <div class="camera-card">
+
+                <div class="camera-header">
+
+                    <div>
+
+                        <span>
+                            CAMERA ANALYSIS
+                        </span>
+
+                        <h3>
+                            Interview posture
+                        </h3>
+
+                    </div>
+
+
+                    <span class="camera-live">
+                        ● LIVE
+                    </span>
+
+                </div>
+
+
+                <div class="camera-preview">
+                    <video
+                    id="cameraVideo"
+                    autoplay
+                    playsinline
+                    muted
+                    ></video>
+                <div
+                id="cameraMessage"
+                class="camera-message"
+                >
+                Starting camera...
+            </div>
+        </div>
+
+
+                <div class="camera-status">
+
+                    <span>
+                        ●
+                    </span>
+
+                    Camera ready for analysis
+
+                </div>
+
+            </div>
+
+
+
+            <!-- LIVE METRICS -->
+
+            <div class="metrics-card">
+
+                <div class="metrics-title">
+
+                    <span>
+                        LIVE PERFORMANCE
+                    </span>
+
+                    <small>
+                        AI monitoring
+                    </small>
+
+                </div>
+
+
+                <!-- POSTURE -->
+
+                <div class="metric">
+
+                    <div class="metric-top">
+
+                        <span>
+                            Posture
+                        </span>
+
+                        <strong id="postureScore">
+                            --
+                        </strong>
+
+                    </div>
+
+
+                    <div class="metric-bar">
+
+                        <div
+                            id="postureProgress"
+                            style="width: 0%;"
+                        ></div>
+
+                    </div>
+
+                </div>
+
+
+
+                <!-- GAZE -->
+
+                <div class="metric">
+
+                    <div class="metric-top">
+
+                        <span>
+                            Eye Gaze
+                        </span>
+
+                        <strong id="gazeScore">
+                            --
+                        </strong>
+
+                    </div>
+
+
+                    <div class="metric-bar">
+
+                        <div
+                            id="gazeProgress"
+                            style="width: 0%;"
+                        ></div>
+
+                    </div>
+
+                </div>
+
+
+
+                <!-- MOVEMENT -->
+
+                <div class="metric">
+
+                    <div class="metric-top">
+
+                        <span>
+                            Movement
+                        </span>
+
+                        <strong id="movementScore">
+                            --
+                        </strong>
+
+                    </div>
+
+
+                    <div class="metric-bar">
+
+                        <div
+                            id="movementProgress"
+                            style="width: 0%;"
+                        ></div>
+
+                    </div>
+
+                </div>
+
+
+
+                <!-- CONFIDENCE -->
+
+                <div class="metric">
+
+                    <div class="metric-top">
+
+                        <span>
+                            Speaking Confidence
+                        </span>
+
+                        <strong id="confidenceLiveScore">
+                            --
+                        </strong>
+
+                    </div>
+
+
+                    <div class="metric-bar">
+
+                        <div
+                            id="confidenceLiveProgress"
+                            style="width: 0%;"
+                        ></div>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+
+
+            <!-- AI TIP -->
+
+            <div class="live-tip">
+
+                <span class="tip-icon">
+                    ✦
+                </span>
+
+                <div>
+
+                    <strong>
+                        AI Coach Tip
+                    </strong>
+
+                    <p id="aiTip">
+                        Sit comfortably, keep your shoulders
+                        relaxed and maintain a natural gaze.
+                    </p>
+
+                </div>
+
+            </div>
+
+
+        </aside>
+
+
+    </main>
+
+
+
+    <!-- ========================================
+         INTERVIEW PROGRESS
+    ======================================== -->
+
+    <div class="interview-progress">
+
+        <div class="progress-info">
+
+            <span>
+                Interview Progress
+            </span>
+
+            <strong>
+                <span id="progressPercent">
+                    20
+                </span>%
+            </strong>
+
+        </div>
+
+
+        <div class="interview-progress-bar">
+
+            <div
+                id="interviewProgress"
+                style="width: 20%;"
+            ></div>
+
+        </div>
+
+    </div>
+
+
+</div>
+
+
+
+<script>
+
+    // ========================================
+    // QUESTIONS
+    // ========================================
+
+    const questions = [
+
+        "Can you introduce yourself and tell me about your technical background?",
+
+        "Tell me about a project you have worked on and the technologies you used.",
+
+        "What is the difference between supervised and unsupervised machine learning?",
+
+        "Describe a difficult technical problem you faced and how you solved it.",
+
+        "Why should we consider you for this role?"
+    ];
+
+
+    let currentQuestion = 0;
+
+
+    // ========================================
+    // DISPLAY NEXT QUESTION
+    // ========================================
+
+    function showNextQuestion() {
+
+        currentQuestion++;
+
+        if (currentQuestion >= questions.length) {
+
+            finishInterview();
+
+            return;
+        }
+
+
+        document.getElementById("questionNumber")
+            .textContent = currentQuestion + 1;
+
+
+        document.getElementById("aiQuestion")
+    .innerHTML =
+    questions[currentQuestion];
+
+
+// AI speaks the new question
+setTimeout(() => {
+    speakAI(questions[currentQuestion]);
+}, 500);
+
+
+        document.getElementById("answerInput")
+            .value = "";
+
+
+        const progress =
+            ((currentQuestion + 1) / questions.length) * 100;
+
+
+        document.getElementById("interviewProgress")
+            .style.width = progress + "%";
+
+
+        document.getElementById("progressPercent")
+            .textContent = Math.round(progress);
+
+    }
+
+
+
+    // ========================================
+    // SUBMIT ANSWER
+    // ========================================
+
+    function submitAnswer() {
+
+        const answer =
+            document.getElementById("answerInput")
+                .value.trim();
+
+
+        if (answer === "") {
+
+            alert("Please provide an answer before continuing.");
+
+            return;
+        }
+
+
+        // Temporary simulation
+        // Real AI analysis will be connected later.
+
+        updateLiveMetrics();
+
+        showNextQuestion();
+
+    }
+
+
+
+    // ========================================
+    // TEMPORARY LIVE METRICS
+    // ========================================
+
+    function updateLiveMetrics() {
+
+        const posture = Math.floor(
+            Math.random() * 15
+        ) + 80;
+
+        const gaze = Math.floor(
+            Math.random() * 15
+        ) + 75;
+
+        const movement = Math.floor(
+            Math.random() * 15
+        ) + 78;
+
+        const confidence = Math.floor(
+            Math.random() * 15
+        ) + 70;
+
+
+        document.getElementById("postureScore")
+            .textContent = posture + "%";
+
+        document.getElementById("gazeScore")
+            .textContent = gaze + "%";
+
+        document.getElementById("movementScore")
+            .textContent = movement + "%";
+
+        document.getElementById("confidenceLiveScore")
+            .textContent = confidence + "%";
+
+
+        document.getElementById("postureProgress")
+            .style.width = posture + "%";
+
+        document.getElementById("gazeProgress")
+            .style.width = gaze + "%";
+
+        document.getElementById("movementProgress")
+            .style.width = movement + "%";
+
+        document.getElementById("confidenceLiveProgress")
+            .style.width = confidence + "%";
+
+    }
+
+
+
+    // ========================================
+    // MICROPHONE
+    // ========================================
+
+    // =====================================================
+// REAL SPEECH RECOGNITION
+// =====================================================
+
+let recording = false;
+let recognition = null;
+
+const micButton = document.getElementById("micButton");
+const recordingStatus = document.getElementById("recordingStatus");
+const answerInput = document.getElementById("answerInput");
+
+
+// Check browser support
+if ("webkitSpeechRecognition" in window) {
+
+    recognition = new webkitSpeechRecognition();
+
+    recognition.continuous = true;
+    recognition.interimResults = true;
+    recognition.lang = "en-IN";
+
+
+    // When speech is detected
+    recognition.onresult = function(event) {
+
+        let finalText = "";
+        let interimText = "";
+
+        for (
+            let i = event.resultIndex;
+            i < event.results.length;
+            i++
+        ) {
+
+            const transcript =
+                event.results[i][0].transcript;
+
+            if (event.results[i].isFinal) {
+
+                finalText += transcript + " ";
+
+            } else {
+
+                interimText += transcript;
+            }
+        }
+
+
+        // Add final speech to textarea
+        if (finalText) {
+
+            answerInput.value += finalText;
+
+        }
+    };
+
+
+    // Recognition stopped
+    recognition.onend = function() {
+
+        if (recording) {
+
+            recognition.start();
+
+        }
+    };
+
+
+    // Error handling
+    recognition.onerror = function(event) {
+
+        console.error(
+            "Speech recognition error:",
+            event.error
+        );
+
+        recording = false;
+
+        micButton.innerHTML =
+            "🎙 <span>Start Speaking</span>";
+
+        recordingStatus.textContent =
+            "Microphone error";
+    };
+
+
+} else {
+
+    console.log(
+        "Speech recognition is not supported in this browser."
+    );
+}
+
+
+// =====================================================
+// START / STOP RECORDING
+// =====================================================
+
+function toggleRecording() {
+
+    if (!recognition) {
+
+        alert(
+            "Speech recognition is not supported in this browser. Please use Google Chrome."
+        );
+
+        return;
+    }
+
+
+    if (!recording) {
+
+        // START
+        recording = true;
+
+        recognition.start();
+
+        micButton.innerHTML =
+            "⏹ <span>Stop Speaking</span>";
+
+        recordingStatus.textContent =
+            "Listening...";
+
+        recordingStatus.style.color =
+            "#dc2626";
+
+
+    } else {
+
+        // STOP
+        recording = false;
+
+        recognition.stop();
+
+        micButton.innerHTML =
+            "🎙 <span>Start Speaking</span>";
+
+        recordingStatus.textContent =
+            "Ready";
+
+        recordingStatus.style.color =
+            "#6366f1";
+    }
+}
+
+
+    // ========================================
+    // FINISH INTERVIEW
+    // ========================================
+
+    function finishInterview() {
+
+        alert(
+            "Interview completed!\n\n" +
+            "The AI performance report will be generated here."
+        );
+
+
+        window.location.href =
+            "performance.html";
+
+    }
+
+
+
+    // ========================================
+    // EXIT INTERVIEW
+    // ========================================
+
+    function exitInterview() {
+
+        const confirmExit =
+            confirm(
+                "Are you sure you want to exit the interview?"
+            );
+
+
+        if (confirmExit) {
+
+            window.location.href =
+                "performance.html";
+
+        }
+
+    }
+    // =====================================================
+// REAL CAMERA
+// =====================================================
+
+const cameraVideo = document.getElementById("cameraVideo");
+const cameraMessage = document.getElementById("cameraMessage");
+
+async function startCamera() {
+
+    try {
+
+        const stream = await navigator.mediaDevices.getUserMedia({
+            video: true,
+            audio: false
+        });
+
+        cameraVideo.srcObject = stream;
+
+        cameraMessage.style.display = "none";
+
+    } catch (error) {
+
+        console.error("Camera error:", error);
+
+        cameraMessage.textContent =
+            "Camera access was not allowed.";
+
+    }
+}
+
+
+// Start camera when page loads
+window.addEventListener("load", startCamera);
+
+// =====================================================
+// INTERVIEW VIDEO + AUDIO RECORDING
+// =====================================================
+
+let interviewRecorder = null;
+let recordedChunks = [];
+let interviewStream = null;
+let isInterviewRecording = false;
+
+
+async function toggleInterviewRecording() {
+
+    const recordButton =
+        document.getElementById("recordButton");
+
+    const status =
+        document.getElementById("recordingStatus");
+
+
+    // STOP RECORDING
+    if (isInterviewRecording) {
+
+        interviewRecorder.stop();
+
+        isInterviewRecording = false;
+
+        recordButton.innerHTML =
+            "🔴 <span>Record Interview</span>";
+
+        status.textContent =
+            "Recording saved";
+
+        status.style.color =
+            "#16a34a";
+
+        return;
+    }
+
+
+    // START RECORDING
+    try {
+
+        interviewStream =
+            await navigator.mediaDevices.getUserMedia({
+                video: true,
+                audio: true
+            });
+
+
+        recordedChunks = [];
+
+
+        interviewRecorder =
+            new MediaRecorder(interviewStream);
+
+
+        interviewRecorder.ondataavailable =
+            function(event) {
+
+                if (event.data.size > 0) {
+
+                    recordedChunks.push(event.data);
+                }
+            };
+
+
+        interviewRecorder.onstop =
+            function() {
+
+                const recordedBlob =
+                    new Blob(
+                        recordedChunks,
+                        {
+                            type: "video/webm"
+                        }
+                    );
+
+
+                const videoURL =
+                    URL.createObjectURL(recordedBlob);
+
+
+                // Store temporarily for this browser session
+                window.lastInterviewRecording =
+                    videoURL;
+
+
+                // Stop camera and microphone
+                interviewStream
+                    .getTracks()
+                    .forEach(track => track.stop());
+
+
+                console.log(
+                    "Interview recording completed."
+                );
+
+                console.log(
+                    "Recording URL:",
+                    videoURL
+                );
+            };
+
+
+        interviewRecorder.start();
+
+        isInterviewRecording = true;
+
+
+        recordButton.innerHTML =
+            "⏹ <span>Stop Recording</span>";
+
+        status.textContent =
+            "Recording...";
+
+        status.style.color =
+            "#dc2626";
+
+
+    } catch (error) {
+
+        console.error(
+            "Recording error:",
+            error
+        );
+
+        alert(
+            "Camera and microphone permission is required to record the interview."
+        );
+    }
+}
+
+// ========================================
+// AI VOICE ASSISTANT
+// ========================================
+
+function speakAI(text) {
+
+    if (!("speechSynthesis" in window)) {
+        console.log("Text-to-speech is not supported.");
+        return;
+    }
+
+    // Stop previous speech
+    window.speechSynthesis.cancel();
+
+    const speech = new SpeechSynthesisUtterance(text);
+
+    speech.lang = "en-IN";
+    speech.rate = 0.95;
+    speech.pitch = 1;
+    speech.volume = 1;
+
+    window.speechSynthesis.speak(speech);
+}
+// Speak the first interview question
+window.addEventListener("load", () => {
+
+    setTimeout(() => {
+        speakAI(questions[0]);
+    }, 1000);
+
+});
+
+</script>
+
+
+</body>
+
+</html>

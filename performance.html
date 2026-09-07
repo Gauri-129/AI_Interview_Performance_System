@@ -1,0 +1,803 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
+
+    <title>InterviewAI | Performance</title>
+
+    <link rel="stylesheet" href="style.css">
+
+</head>
+
+
+<body>
+
+<div class="dashboard">
+
+
+    <!-- =========================
+         SIDEBAR
+    ========================== -->
+
+    <aside class="sidebar">
+
+        <div class="sidebar-brand">
+
+            <div class="brand-icon">
+                AI
+            </div>
+
+            <span>
+                InterviewAI
+            </span>
+
+        </div>
+
+
+        <nav class="sidebar-nav">
+
+            <a href="#" class="nav-item active">
+
+                <span>▦</span>
+
+                Dashboard
+
+            </a>
+
+
+            <a href="#" class="nav-item">
+
+                <span>◉</span>
+
+                Practice Interview
+
+            </a>
+
+
+            <a href="#" class="nav-item">
+
+                <span>◒</span>
+
+                Performance
+
+            </a>
+
+
+            <a href="#" class="nav-item">
+
+                <span>◷</span>
+
+                Interview History
+
+            </a>
+
+        </nav>
+
+
+        <div class="sidebar-bottom">
+
+            <div class="ai-status">
+
+                <span class="status-dot"></span>
+
+                AI Coach Active
+
+            </div>
+
+
+            <button
+                class="logout-btn"
+                onclick="logout()"
+            >
+                Log out
+            </button>
+
+        </div>
+
+    </aside>
+
+
+
+    <!-- =========================
+         MAIN CONTENT
+    ========================== -->
+
+    <main class="dashboard-main">
+
+
+        <!-- HEADER -->
+
+        <header class="dashboard-header">
+
+            <div>
+
+                <p class="dashboard-label">
+                    PERFORMANCE DASHBOARD
+                </p>
+
+                <h1 id="welcomeMessage">
+                    Welcome back!
+                </h1>
+
+                <p class="dashboard-subtitle">
+                    Here's how your interview preparation is progressing.
+                </p>
+
+            </div>
+
+
+            <button
+                class="new-interview-btn"
+                onclick="startInterview()"
+            >
+                + Start New Interview
+            </button>
+
+        </header>
+
+
+
+        <!-- =========================
+             PROFILE SUMMARY
+        ========================== -->
+
+        <section class="profile-card">
+
+            <div class="profile-avatar" id="profileAvatar">
+                U
+            </div>
+
+
+            <div class="profile-info">
+
+                <h2 id="candidateName">
+                    Candidate
+                </h2>
+
+                <p id="candidateRole">
+                    Target Role
+                </p>
+
+            </div>
+
+
+            <div class="profile-details">
+
+                <div>
+
+                    <span>Experience</span>
+
+                    <strong id="candidateExperience">
+                        —
+                    </strong>
+
+                </div>
+
+
+                <div>
+
+                    <span>Skills</span>
+
+                    <strong id="candidateSkills">
+                        —
+                    </strong>
+
+                </div>
+
+            </div>
+
+        </section>
+
+
+
+        <!-- =========================
+             OVERALL SCORE
+        ========================== -->
+
+        <section class="score-section">
+
+
+            <div class="overall-score-card">
+
+                <div>
+
+                    <p class="card-label">
+                        OVERALL PERFORMANCE
+                    </p>
+
+                    <h2>
+                        <span id="overallScore">--</span>
+                        <span>/100</span>
+                    </h2>
+
+                    <p class="score-description">
+                        You're performing well. Keep practicing
+                        to reach the next level.
+                    </p>
+
+                </div>
+
+
+                <div class="score-circle">
+
+                    <div>
+
+                        <strong id="overallPercentage">
+                            --%
+                        </strong>
+
+                        <span>
+                            Overall
+                        </span>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+
+        </section>
+
+
+
+        <!-- =========================
+             PERFORMANCE BREAKDOWN
+        ========================== -->
+
+        <section>
+
+            <div class="section-heading">
+
+                <div>
+
+                    <p class="dashboard-label">
+                        PERFORMANCE BREAKDOWN
+                    </p>
+
+                    <h2>
+                        Your interview skills
+                    </h2>
+
+                </div>
+
+                <span class="latest-date">
+                    Latest Interview
+                </span>
+
+            </div>
+
+
+            <div class="performance-grid">
+
+
+                <!-- TECHNICAL -->
+
+                <div class="performance-card">
+
+                    <div class="performance-card-top">
+
+                        <span>
+                            Technical Knowledge
+                        </span>
+
+                        <strong id="technicalScore">
+                            --%
+                        </strong>
+
+                    </div>
+
+
+                    <div class="progress-bar">
+
+                        <div
+                        id="technicalProgress"
+                        class="progress technical"
+                        style="width: 0%;">
+                    </div>
+
+                    </div>
+
+
+                    <p>
+                        Strong understanding of technical concepts.
+                    </p>
+
+                </div>
+
+
+
+                <!-- COMMUNICATION -->
+
+                <div class="performance-card">
+
+                    <div class="performance-card-top">
+
+                        <span>
+                            Communication
+                        </span>
+
+                        <strong id="communicationScore">
+                            --%
+                        </strong>
+
+                    </div>
+
+
+                    <div class="progress-bar">
+
+                        <div
+                        id="communicationProgress"
+                        class="progress communication"
+                        style="width: 0%;"
+                        ></div>
+
+                    </div>
+
+
+                    <p>
+                        Improve clarity and reduce filler words.
+                    </p>
+
+                </div>
+
+
+
+                <!-- CONFIDENCE -->
+
+                <div class="performance-card">
+
+                    <div class="performance-card-top">
+
+                        <span>
+                            Confidence
+                        </span>
+
+                        <strong id="confidenceScore">
+                            --%
+                        </strong>
+
+                    </div>
+
+
+                    <div class="progress-bar">
+
+                        <div
+                        id="confidenceProgress"
+                        class="progress confidence"
+                        style="width: 0%;"
+                        ></div>
+
+                    </div>
+
+
+                    <p>
+                        Work on speaking confidently and consistently.
+                    </p>
+
+                </div>
+
+
+
+                <!-- ANSWER QUALITY -->
+
+                <div class="performance-card">
+
+                    <div class="performance-card-top">
+
+                        <span>
+                            Answer Quality
+                        </span>
+
+                        <strong id="answerQualityScore">
+                            --%
+                        </strong>
+
+                    </div>
+
+
+                    <div class="progress-bar">
+
+                        <div
+                        id="answerQualityProgress"
+                        class="progress answer-quality"
+                        style="width: 0%;"
+                        ></div>
+
+                    </div>
+
+
+                    <p>
+                        Your answers are relevant and well structured.
+                    </p>
+
+                </div>
+
+
+            </div>
+
+        </section>
+
+
+
+        <!-- =========================
+             AI INSIGHTS
+        ========================== -->
+
+        <section class="insights-section">
+
+            <div class="section-heading">
+
+                <div>
+
+                    <p class="dashboard-label">
+                        AI COACH
+                    </p>
+
+                    <h2>
+                        Personalized insights
+                    </h2>
+
+                </div>
+
+            </div>
+
+
+            <div class="insights-grid">
+
+
+                <div class="insight-card strength">
+
+                    <span class="insight-icon">
+                        ↑
+                    </span>
+
+                    <div>
+
+                        <span>
+                            YOUR STRENGTH
+                        </span>
+
+                        <h3>
+                            Answer Quality
+                        </h3>
+
+                        <p>
+                            Your answers are structured,
+                            relevant and demonstrate
+                            good technical understanding.
+                        </p>
+
+                    </div>
+
+                </div>
+
+
+
+                <div class="insight-card improvement">
+
+                    <span class="insight-icon">
+                        !
+                    </span>
+
+                    <div>
+
+                        <span>
+                            NEEDS IMPROVEMENT
+                        </span>
+
+                        <h3>
+                            Confidence
+                        </h3>
+
+                        <p>
+                            Try maintaining a steady speaking
+                            pace and reducing hesitation
+                            between answers.
+                        </p>
+
+                    </div>
+
+                </div>
+
+
+
+                <div class="insight-card next-step">
+
+                    <span class="insight-icon">
+                        →
+                    </span>
+
+                    <div>
+
+                        <span>
+                            NEXT STEP
+                        </span>
+
+                        <h3>
+                            Practice behavioral questions
+                        </h3>
+
+                        <p>
+                            Your next interview should focus
+                            on communication and confidence.
+                        </p>
+
+                    </div>
+
+                </div>
+
+
+            </div>
+
+        </section>
+
+
+
+        <!-- =========================
+             PROGRESS
+        ========================== -->
+
+        <section class="progress-section">
+
+            <div class="section-heading">
+
+                <div>
+
+                    <p class="dashboard-label">
+                        PROGRESS
+                    </p>
+
+                    <h2>
+                        Your improvement journey
+                    </h2>
+
+                </div>
+
+            </div>
+
+
+            <div class="progress-card">
+
+
+                <div class="progress-header">
+
+                    <div>
+
+                        <span>
+                            Overall Score
+                        </span>
+
+                        <strong>
+                            81/100
+                        </strong>
+
+                    </div>
+
+                    <span class="growth">
+                        +12% from first interview
+                    </span>
+
+                </div>
+
+
+                <div class="chart-placeholder">
+
+                    <div class="chart-line">
+
+                        <span class="point p1"></span>
+
+                        <span class="point p2"></span>
+
+                        <span class="point p3"></span>
+
+                        <span class="point p4"></span>
+
+                        <span class="point p5"></span>
+
+                    </div>
+
+
+                    <div class="chart-labels">
+
+                        <span>
+                            Interview 1
+                        </span>
+
+                        <span>
+                            Interview 2
+                        </span>
+
+                        <span>
+                            Interview 3
+                        </span>
+
+                        <span>
+                            Interview 4
+                        </span>
+
+                        <span>
+                            Latest
+                        </span>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </section>
+
+
+
+        <!-- =========================
+             AI ENCOURAGEMENT
+        ========================== -->
+
+        <section class="encouragement-card">
+
+            <div class="encouragement-icon">
+                ✦
+            </div>
+
+            <div>
+
+                <span>
+                    YOUR AI COACH SAYS
+                </span>
+
+                <h2>
+                    You're getting better with every interview.
+                </h2>
+
+                <p>
+                    Keep going! Your communication and confidence
+                    are improving. Focus on your next interview
+                    and aim for one small improvement.
+                </p>
+
+            </div>
+
+        </section>
+
+
+    </main>
+
+</div>
+
+
+<script>
+
+    // ========================================
+    // LOAD PROFILE
+    // ========================================
+
+    const savedProfile =
+        localStorage.getItem("interviewAIProfile");
+
+
+    if (savedProfile) {
+
+        const profile =
+            JSON.parse(savedProfile);
+
+
+        document.getElementById("candidateName")
+            .textContent = profile.name;
+
+
+        document.getElementById("welcomeMessage")
+            .textContent =
+            "Welcome back, " + profile.name.split(" ")[0] + "!";
+
+
+        document.getElementById("candidateRole")
+            .textContent = profile.targetRole;
+
+
+        document.getElementById("candidateExperience")
+            .textContent = profile.experience;
+
+
+        document.getElementById("candidateSkills")
+            .textContent =
+            profile.skills.join(", ");
+
+
+        document.getElementById("profileAvatar")
+            .textContent =
+            profile.name.charAt(0).toUpperCase();
+
+    }
+
+
+
+    // ========================================
+    // LOGOUT
+    // ========================================
+
+    function logout() {
+
+        localStorage.removeItem("interviewAIProfile");
+
+        window.location.href = "index.html";
+
+    }
+
+
+
+    // ========================================
+    // START INTERVIEW
+    // ========================================
+
+    function startInterview() {
+
+    window.location.href = "interview.html";
+}
+
+    // ========================================
+// PERFORMANCE DATA
+// ========================================
+
+// Temporary demo data.
+// Later this will come from the actual AI analysis.
+
+const performanceData = {
+    overall: 81,
+    technical: 84,
+    communication: 78,
+    confidence: 72,
+    answerQuality: 86
+};
+
+
+// ========================================
+// DISPLAY PERFORMANCE DATA
+// ========================================
+
+document.getElementById("overallScore")
+    .textContent = performanceData.overall;
+
+document.getElementById("overallPercentage")
+    .textContent = performanceData.overall + "%";
+
+document.getElementById("technicalScore")
+    .textContent = performanceData.technical + "%";
+
+document.getElementById("communicationScore")
+    .textContent = performanceData.communication + "%";
+
+document.getElementById("confidenceScore")
+    .textContent = performanceData.confidence + "%";
+
+document.getElementById("answerQualityScore")
+    .textContent = performanceData.answerQuality + "%";
+
+
+// Progress bars
+
+document.getElementById("technicalProgress")
+    .style.width = performanceData.technical + "%";
+
+document.getElementById("communicationProgress")
+    .style.width = performanceData.communication + "%";
+
+document.getElementById("confidenceProgress")
+    .style.width = performanceData.confidence + "%";
+
+document.getElementById("answerQualityProgress")
+    .style.width = performanceData.answerQuality + "%";
+
+</script>
+
+
+</body>
+
+</html>
