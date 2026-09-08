@@ -95,23 +95,23 @@ registrationForm.addEventListener("submit", async function (event) {
     try {
 
         const response = await fetch(
-            "http://127.0.0.1:8000/candidates",
-            {
-                method: "POST",
+    "https://ai-interview-performance-system.onrender.com/candidates",
+    {
+        method: "POST",
 
-                headers: {
-                    "Content-Type": "application/json"
-                },
+        headers: {
+            "Content-Type": "application/json"
+        },
 
-                body: JSON.stringify({
-                    name: fullName,
-                    email: email,
-                    target_role: targetRole,
-                    experience: experience,
-                    skills: skills
-                })
-            }
-        );
+        body: JSON.stringify({
+            name: fullName,
+            email: email,
+            target_role: targetRole,
+            experience: experience,
+            skills: skills
+        })
+    }
+);
 
 
         const data = await response.json();
